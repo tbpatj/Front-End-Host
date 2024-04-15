@@ -29,7 +29,11 @@ app.use(express.json());
 console.log(`looking for the front end in: ${FOLDER_PATH ?? "build"}`);
 app.use("/", (req, res) => {
   res.sendFile(
-    osFilePath(`${FOLDER_PATH ?? "build"}/${req?.url ?? "index.html"}`),
+    osFilePath(
+      `${FOLDER_PATH ?? "build"}${
+        req?.url !== "/" ? req?.url ?? "" : "/index.html"
+      }`
+    ),
     {
       root: __dirname,
     }
