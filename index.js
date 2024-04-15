@@ -5,7 +5,7 @@ const { shipAscii } = require("./ship");
 require("dotenv").config();
 
 //load up the env variables
-const { PORT, CORS_ALLOWED_URLS } = process.env;
+const { PORT, CORS_ALLOWED_URLS, FOLDER_PATH } = process.env;
 
 //start up the app
 const app = express();
@@ -25,8 +25,11 @@ try {
 app.use(express.json());
 
 //serve all the neccesary files when we hit the main endpoint
+console.log(`looking for the front end in: ${FOLDER_PATH ?? "build"}`);
 app.use("/", (req, res) => {
-  res.sendFile(osFilePath("build/index.html"), { root: __dirname });
+  res.sendFile(osFilePath(`${FOLDER_PATH ?? "build"}/index.html`), {
+    root: __dirname,
+  });
 });
 
 //start the server if the port has been provided in a .env
