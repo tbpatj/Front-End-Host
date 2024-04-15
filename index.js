@@ -1,5 +1,5 @@
 //load up the required modules
-const { osFilePath } = require("./src/utils/file-path-util");
+const { osFilePath } = require("./file-path-util");
 const express = require("express");
 const cors = require("cors");
 const { shipAscii } = require("./ship");
